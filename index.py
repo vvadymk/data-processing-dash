@@ -20,7 +20,6 @@ def load_data(ticker, start, end):
     return data
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-server = app.server 
 app.title = 'Ціни акцій'
 
 app.layout = html.Div([
@@ -92,5 +91,5 @@ def func(n_clicks, ticker, start_date, end_date):
     df = load_data(ticker, start_date, end_date)
     return dcc.send_data_frame(df.to_csv, f"{ticker}_stock_data.csv")
 
-def handler(request):
-    return server  # потрібно для запуску через Vercel
+if __name__ == '__main__':
+    app.run(debug=True)
